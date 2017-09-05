@@ -2,6 +2,17 @@ const express = require('express');
 const mustacheExpress = require('mustache-express');
 const bodyParser = require('body-parser');
 
+const tasks = [
+  "call the doctor",
+  "renew license plate"
+]
+
+const finished = [
+  "print flyers",
+  "register at DMV",
+  "eat hot cheetos"
+]
+
 const app = express();
 
 // use mustache engine
@@ -19,7 +30,16 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 
 app.get('/', function(req, res) {
-  res.render('index', {test: "hello"});
+  res.render('index', {tasks, finished});
+});
+
+app.post('/', function(req, res) {
+  let todo = req.body.todo;
+  console.log(todo);
+  tasks.push(' ' + todo);
+  console.log(tasks);
+  res.redirect('/');
+
 });
 
 app.listen(3000, function(req, res) {
