@@ -11,11 +11,10 @@
 <section>
   <h3>Things Left To Do:</h3>
   {{#tasks}}
-  <ul>
-    <li>
-      {{.}}
-    </li>
-  </ul>
+    <form method="post" action="/done">
+      <input type="text" name="done" value="{{.}}" />
+      <button type="submit">Finished</button>
+    </form>
   {{/tasks}}
 
 </section>

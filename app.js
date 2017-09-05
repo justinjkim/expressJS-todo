@@ -39,8 +39,16 @@ app.post('/', function(req, res) {
   tasks.push(' ' + todo);
   console.log(tasks);
   res.redirect('/');
-
 });
+
+app.post('/done', function(req, res) {
+  let done = req.body.done;
+  console.log(done);
+  finished.push(done);
+  console.log(finished);
+  tasks.pop(this);
+  res.redirect('/');
+})
 
 app.listen(3000, function(req, res) {
   console.log('Starting up Todo List app...');
