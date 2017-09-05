@@ -1,0 +1,27 @@
+const express = require('express');
+const mustacheExpress = require('mustache-express');
+const bodyParser = require('body-parser');
+
+const app = express();
+
+// use mustache engine
+app.engine('mustache', mustacheExpress());
+
+// hmm, what's diff b/w this and app.engine?
+app.set('view engine', 'mustache');
+
+app.set('views', './views');
+app.set(express.static(__dirname + '/public'));
+
+// app.use? specific for packages?
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+
+
+app.get('/', function(req, res) {
+  res.render('index', {test: "hello"});
+});
+
+app.listen(3000, function(req, res) {
+  console.log('Starting up Todo List app...');
+});
